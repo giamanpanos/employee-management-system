@@ -1,0 +1,61 @@
+<div class="page-container">
+  <mat-card class="details-card">
+    <mat-card-header>
+      <mat-card-title>Employee Details</mat-card-title>
+      <mat-card-subtitle> View employee information </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="loading-container" *ngIf="loading">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Loading employee...</p>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <div class="details" *ngIf="employee">
+        <div class="detail-row">
+          <span class="label">ID</span>
+          <span>{{ employee.id }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label">Name</span>
+          <span>{{ employee.name }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label">Email</span>
+          <span>{{ employee.email }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label">Position</span>
+          <span>{{ employee.position || "-" }}</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="label">Salary</span>
+          <span>
+            {{ employee.salary | number: "1.2-2" }}
+          </span>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <a mat-button routerLink="/employees"> Back to Employees </a>
+
+      <a
+        *ngIf="employee"
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/employees', employee.id]"
+      >
+        Edit Employee
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>
